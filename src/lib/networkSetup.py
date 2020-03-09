@@ -4,10 +4,6 @@ import socket
 import time
 from network import LoRa
 
-from machine import UART
-import os
-uart = UART(0, 115200)
-os.dupterm(uart)
 
 def linkup ():
     # Colors
@@ -23,12 +19,12 @@ def linkup ():
     lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
 
     # Set network keys
-    app_eui = binascii.unhexlify('70B3D57ED002B1EE')
-    app_key = binascii.unhexlify('2BE23F73F9AA22C1338FA0AE8816AC60')
+    app_eui = binascii.unhexlify('70B3D57ED002B8EE')
+    app_key = binascii.unhexlify('520EFBD75F227E786B091602CBCB2232')
 
     # Join the network
     lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
-    pycom.rgbled(red)
+    pycom.rgbled(green)
 
     # Loop until joined
     while not lora.has_joined():
